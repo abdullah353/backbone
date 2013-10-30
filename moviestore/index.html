@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Backbone Basics</title>
+	<script src="js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="js/lib/underscore.js"></script>
+	<script type="text/javascript" src="js/lib/backbone.js"></script>
+
+</head>
+<body>
+<div class="wrapper"></div>
+<script id="movie-table" type="text/template">
+ 
+ <thead>
+  <tr>
+   <th column="rank"><div>Rank</div></th>
+   <th column="title"><div>Title</div></th>
+   <th column="studio"><div>Studio</div></th>
+   <th column="gross"><div>Gross</div></th>
+   <th column="year"><div>Year</div></th>
+  </tr>
+ </thead>
+ <tbody>
+   <% movies.each(function(movie) { %>
+     <%= movieTemplate(movie.toJSON())  %>
+   <% }); %>
+ </tbody>
+ 
+</script>
+ 
+<script id="movie-row" type="text/template">
+ <tr>
+   <td><div><%= rank %></div></td>
+   <td><div><%= title %></div></td>
+   <td><div><%= studio %></div></td>
+   <td><div><%= year %></div></td>
+ </tr>
+</script>
+</body>
+<script src="app.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+ 		var movieData = new Movie();
+   var movieList = new Movies(movieData);
+ 
+   var movieView = new MovieTable({ collection: movieList });
+ 
+   $('.wrapper').html( movieView.render().$el.attr('id', 'movies') );
+ 
+});
+</script>
+</html>
